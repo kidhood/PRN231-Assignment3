@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcDemo.Protos";
+
+package courtcrud;
+
+import "google/api/annotations.proto";
+
+service CourtCrud {
+	rpc CreateCourt(CreateCourtRequest) returns (CreateCourtResponse){}
+	
+	rpc ReadCourtList(ReadCourtRequestList) returns (ReadCourtResponseList){}
+
+	rpc ReadCourt(ReadCourtRequest) returns (ReadCourtResponse){}
+
+	rpc UpdateCourt(UpdateCourtRequest) returns (UpdateCourtResponse){}
+
+	rpc DeleteCourt(DeleteCourtRequest) returns (DeleteCourtResponse){}
+
+	rpc ReadCourtListJson(ReadCourtListJsonRequest) returns (ReadCourtListJsonResponse){
+		option (google.api.http) = {
+            get: "/v1/list",
+            body: "*"
+        };
+	}
+}
+
+message CreateCourtRequest {
+	string name  = 1;
+	int32 status = 2;
+	int32 surface_type = 3;
+	int32 opening_hours = 4;
+	int32 close_hours = 5;
+	string amentities = 6;
+	int32 capacity = 7;
+	int32 court_type = 8;
+}
+
+message CreateCourtResponse {
+	int32 status = 1;
+	string message = 2;
+}
+
+message ReadCourtRequest {
+	int32 id = 1;
+}
+
+message ReadCourtResponse {
+	int32 id = 1;
+	string name  = 2;
+	int32 surface_type = 3;
+	int32 status = 4;
+	string total_booking = 5;
+	int32 opening_hours = 6;
+	int32 close_hours = 7;
+	string amentities = 8;
+	int32 capacity = 9;
+	int32 court_type = 10;
+}
+
+message ReadCourtRequestList{
+	int32 page_index = 1;
+	int32 page_size = 2;
+	string search_text = 3;
+	int32 search_mode = 4;
+	int32 status_filter = 5;
+	int32 surface_type_filter = 6;
+	int32 court_type = 7;
+	int32 opening_hours = 8;
+	int32 close_hours = 9;
+}
+
+message ReadCourtListJsonRequest {
+	int32 page_index = 1;
+	int32 page_size = 2;
+	string search_text = 3;
+	int32 search_mode = 4;
+	int32 status_filter = 5;
+	int32 surface_type_filter = 6;
+	int32 court_type = 7;
+	int32 opening_hours = 8;
+	int32 close_hours = 9;
+}
+
+message ReadCourtListJsonResponse {
+	repeated ReadCourtResponse cours = 1;
+}
+
+message ReadCourtResponseList {
+	repeated ReadCourtResponse cours = 1;
+}
+
+message UpdateCourtRequest {
+	int32 id = 1;
+	string name  = 2;
+	int32 status = 3;
+	int32 surface_type = 4;
+	int32 opening_hours = 5;
+	int32 close_hours = 6;
+	string amentities = 7;
+	int32 capacity = 8;
+	int32 court_type = 9;
+}
+
+message UpdateCourtResponse {
+	int32 status = 1;
+	string message = 2;
+}
+
+message DeleteCourtRequest {
+	int32 id = 1;
+}
+
+message DeleteCourtResponse {
+	int32 status = 1;
+	string message = 2;
+}
